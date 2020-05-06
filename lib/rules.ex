@@ -110,8 +110,8 @@ defmodule IslandsEngine.Rules do
     {:keep_state_and_data, {:reply, from, :player2_turn}}
   end
 
-  def player2_turn(_event, _caller_pid, state) do
-    {:reply, {:error, :action_out_of_sequence}, :player2_turn, state}
+  def player2_turn({:call, from}, _, _state_data) do
+    {:keep_state_and_data, {:reply, from, :error}}
   end
 
   def game_over({:call, from}, :show_current_state, _state_data) do
